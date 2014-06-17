@@ -1,14 +1,24 @@
 import sublime
 import sublime_plugin
-import os
+from os.path import basename
 
 
-class CopyFilenameCommand(sublime_plugin.TextCommand):
-    def run(self, edit):
-        if len(self.view.file_name()) > 0:
-            filename = os.path.split(self.view.file_name())[1]
-            sublime.set_clipboard(filename)
-            sublime.status_message("Copied file name: %s" % filename)
-
+class FileNameNedded(sublime_plugin.TextCommand):
     def is_enabled(self):
-        return self.view.file_name() and len(self.view.file_name()) > 0
+        return bool(self.view.file_name())
+
+    def send_to_clipboard(self, text, status_message=None):
+        sublime.set_clipboard(text)
+        sublime.status_message(status_message.format(text=text))
+
+
+class CopyFilenameCommand(FileNameNedded):
+    def run(self, edit):
+        filename = basename(self.view.file_name())
+        self.send_to_clipboard(filename, "Copied file name: {text}")
+
+
+class CopyFilepathCommand(FileNameNedded):
+    def run(self, edit):
+        filepath = self.view.file_name()
+        self.send_to_clipboard(filepath, "Copied file path: {text}")
