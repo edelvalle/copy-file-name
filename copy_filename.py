@@ -1,4 +1,7 @@
-import sublime, sublime_plugin, os
+import sublime
+import sublime_plugin
+import os
+
 
 class CopyFilenameCommand(sublime_plugin.TextCommand):
     def run(self, edit):
