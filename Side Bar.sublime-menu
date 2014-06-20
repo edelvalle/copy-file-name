@@ -1,4 +1,12 @@
 [
-    { "command": "copy_filename", "caption": "Copy File Name" },
-    { "command": "copy_filepath", "caption": "Copy File Path" }
+  {
+    "command": "copy_filename",
+    "id": "copy_filename",
+    "caption": "Copy File Name"
+  },
+  {
+    "command": "copy_filepath",
+    "id": "copy_filepath",
+    "caption": "Copy File Path"
+  }
 ]
